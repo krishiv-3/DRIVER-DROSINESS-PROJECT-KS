@@ -55,12 +55,9 @@ learning_rate = ReduceLROnPlateau(monitor= 'val_loss', patience=3, verbose= 3, )
 
 callbacks = [checkpoint, earlystop, learning_rate]
 
-
-
 model.compile(optimizer = 'Adam', 
               loss = 'categorical_crossentropy', 
               metrics = ['accuracy'])
-
 
 model.fit_generator(train_data,steps_per_epoch = train_data.samples// BATCH_SIZE,
                    validation_data = validation_data,
@@ -68,14 +65,11 @@ model.fit_generator(train_data,steps_per_epoch = train_data.samples// BATCH_SIZE
                    callbacks = callbacks,
                     epochs = EPOCHS)
 
-
 # Model Evaluation
-
 
 acc_tr, loss_tr = model.evaluate_generator(train_data)
 print(acc_tr)
 print(loss_tr)
-
 
 acc_vr, loss_vr = model.evaluate_generator(validation_data)
 print(acc_vr)
